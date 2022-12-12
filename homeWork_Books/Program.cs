@@ -139,29 +139,29 @@ namespace homeWork_Books
 
         private void SearchBooks()
         {
-            const string CommandFaindByName = "1";
-            const string CommandFaindByAuthor = "2";
-            const string CommandFaindByYear = "3";
+            const string CommandShowByNames = "1";
+            const string CommandShowByAuthors = "2";
+            const string CommandShowByYear = "3";
 
 
             Console.WriteLine($"По какому параметру вы хотите найти книгу" +
-                $"\n{CommandFaindByName} - название" +
-                $"\n{CommandFaindByAuthor} - автор" +
-                $"\n{CommandFaindByYear} - год выпуска ");
+                $"\n{CommandShowByNames} - название" +
+                $"\n{CommandShowByAuthors} - автор" +
+                $"\n{CommandShowByYear} - год выпуска ");
 
             string userInput = Console.ReadLine();
 
             switch (userInput) 
             {
-                case CommandFaindByName:
+                case CommandShowByNames:
                     ShowByNames();
                     break;
 
-                case CommandFaindByAuthor:
+                case CommandShowByAuthors:
                     ShowByAuthors();
                     break;
 
-                case CommandFaindByYear:
+                case CommandShowByYear:
                     ShowByYear();
                     break;
 
