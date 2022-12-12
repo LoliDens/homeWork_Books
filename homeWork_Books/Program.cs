@@ -10,7 +10,13 @@ namespace homeWork_Books
     {
         static void Main(string[] args)
         {
-            Labrary labrary = new Labrary();
+            Library labrary = new Library(new List<Book>
+            {
+            new Book("Перступление и наказание", "Достоевский",1866),
+            new Book("Война и мир", "Толстой",1820),
+            new Book("Мартышка и очки","Крылов",1815)
+            });
+
             labrary.Work();     
         }
     }
@@ -29,14 +35,14 @@ namespace homeWork_Books
         }
     }
 
-    class Labrary 
+    class Library 
     {
-        private List<Book> _books = new List<Book>() 
+        private List<Book> _books = new List<Book>();
+
+        public Library(List<Book> books) 
         {
-            new Book("Перступление и наказание", "Достоевский",1866),
-            new Book("Война и мир", "Толстой",1820),
-            new Book("Мартышка и очки","Крылов",1815)
-        };
+            _books = books;
+        }
 
         public void Work() 
         {
@@ -74,7 +80,7 @@ namespace homeWork_Books
                         break;
 
                     case CommandFaidBook:
-                        FaindBook();
+                        SearchBooks();
                         break;
 
                     case CommandExit:
@@ -109,7 +115,14 @@ namespace homeWork_Books
             Console.Write("Введите номер книги которую хотите удалить - ");
             int indexBook = ReadNumber();
 
-            _books.RemoveAt(indexBook - 1);
+            if (indexBook < 1 || indexBook > _books.Count)
+            {
+                Console.WriteLine("Книга с данным номером не найдена");
+            }
+            else 
+            {
+                _books.RemoveAt(indexBook - 1);
+            }           
         }
 
         private void ShowAllBooks() 
@@ -124,16 +137,16 @@ namespace homeWork_Books
             }
         }
 
-        private void FaindBook()
+        private void SearchBooks()
         {
             const string CommandFaindByName = "1";
-            const string CommandFaindByAuther = "2";
+            const string CommandFaindByAuthor = "2";
             const string CommandFaindByYear = "3";
 
 
             Console.WriteLine($"По какому параметру вы хотите найти книгу" +
                 $"\n{CommandFaindByName} - название" +
-                $"\n{CommandFaindByAuther} - автор" +
+                $"\n{CommandFaindByAuthor} - автор" +
                 $"\n{CommandFaindByYear} - год выпуска ");
 
             string userInput = Console.ReadLine();
@@ -141,15 +154,15 @@ namespace homeWork_Books
             switch (userInput) 
             {
                 case CommandFaindByName:
-                    FaindByName();
+                    ShowByNames();
                     break;
 
-                case CommandFaindByAuther:
-                    FaindByAuthor();
+                case CommandFaindByAuthor:
+                    ShowByAuthors();
                     break;
 
                 case CommandFaindByYear:
-                    FaindByYear();
+                    ShowByYear();
                     break;
 
                 default:
@@ -158,7 +171,7 @@ namespace homeWork_Books
             }
         }
 
-        private void FaindByName() 
+        private void ShowByNames() 
         {
             Console.Write("Введите название книги которую хотите найти: ");
             string nameBook = Console.ReadLine();
@@ -180,7 +193,7 @@ namespace homeWork_Books
                        
         }
 
-        private void FaindByAuthor() 
+        private void ShowByAuthors() 
         {
             Console.Write("Введите автора книги которую хотите найти: ");
             string auther = Console.ReadLine();
@@ -202,7 +215,7 @@ namespace homeWork_Books
 
         }
 
-        private void FaindByYear() 
+        private void ShowByYear() 
         {
             Console.Write("Введите год выпуска книги которую хотите найти: ");
             int year = ReadNumber();
