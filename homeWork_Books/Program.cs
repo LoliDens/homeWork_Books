@@ -33,6 +33,13 @@ namespace homeWork_Books
             Author = author;
             YearRelease = yearRelease;
         }
+
+        public void ShowInfo() 
+        {
+            Console.WriteLine($"Автор: {Author}" +
+                   $"\nНазвание: {Name}" +
+                   $"\nГод издания: {YearRelease}\n\n");
+        }
     }
 
     class Library 
@@ -131,9 +138,8 @@ namespace homeWork_Books
             {
                 Book book = _books[i];
 
-                Console.WriteLine($"{i+1}.Автор: {book.Author}" +
-                    $"\nНазвание: {book.Name}" +
-                    $"\nГод издания: {book.YearRelease}\n\n");
+                Console.WriteLine($"{i+1}.");
+                book.ShowInfo();
             }
         }
 
